@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +11,9 @@
     min-height: 100vh;
     position: relative;
     width: 100%;
-    background: #000;
+    background-image: url(/rm373batch16-52.jpg);
+    background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,22 +37,29 @@
 }
 
 .main .image-container h1 {
-    color: #00bcd4;
+    position: relative;
+    bottom: 12vw;
+    left: 60%;
+    color: goldenrod;
     text-align: center;
     margin-bottom: 10px;
     font-size: 40px;
+
 }
 
 .main .image-container p {
-    color: #324042;
+    position: relative;
+    bottom: 12vw;
+    left: 60%;
+    color: gold;
     text-align: center;
     margin-bottom: 40px;
 }
 
 .main .input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
     width: 40vw;
     height: 50px;
     border-radius: 20px;
@@ -75,28 +85,65 @@
 }
 
 .main .input .content {
-    color: #aed0d0;
+    position: relative;
+    left: 5vw;
+    top: -2.3vw;
+    color: #0feaea;
     font-size: 15px;
     margin-right: 20px;
-}
-.conversation-container{
-    color: whitesmoke;
-    position: absolute;
-    top: 20%;
-    right: 15%;
 
 }
-.chatbox-input{
+
+.conversation-container {
+    color: whitesmoke;
+    position: absolute;
+    top: 31%;
+    right: 13%;
+    height: 40%;
+    width: 35%;
+    overflow-y: scroll;
+    backdrop-filter: blur(5px);
+}
+
+.conversation-container::before {
+    content: " ";
+    background-color: #fff;
+}
+
+.robot {
+    position: absolute;
+    top: 45.5%;
+    left: 26%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: lighten;
+    border-radius: 50%;
+    height: 50%;
+
+}
+
+.chatbox-input {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
     width: 40vw;
     height: 50px;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
+    background: rgba(24, 148, 176, 0.434);
+    color: goldenrod;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 12px;
+
 }
-.send-btn{
-    position: relative;
-    left: 5%;
-    width: 35vw;
-    height: 50px;
-    border-radius: 10px; 
+
+.send-btn {
+    position: absolute;
+    bottom: 12%;
+    right: 5.8vw;
+    width: 3vw;
+    height: 48px;
+    border-radius: 10px;
+    background-color: #011128;
+    box-shadow: none;
+    color: goldenrod;
 }
