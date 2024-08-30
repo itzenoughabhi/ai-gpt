@@ -11,7 +11,7 @@ function speak(text) {
     const text_speak = new SpeechSynthesisUtterance(text);
     text_speak.rate = 1;
     text_speak.volume = 1;
-    text_speak.pitch = 1;
+    text_speak.pitch = 5;
     window.speechSynthesis.speak(text_speak);
 }
 
@@ -29,7 +29,7 @@ function wishMe() {
 
 // Initialize the assistant
 window.addEventListener('load', () => {
-    speak("Initializing AI...");
+    speak("Initializing ROXX...");
     wishMe();
 });
 
@@ -53,9 +53,9 @@ btn.addEventListener('click', () => {
 function handleUserInput() {
     const userInput = chatboxInput.value.trim();
     if (userInput !== '') {
-        conversation.push(`User: ${userInput}`);
+        conversation.push(`USER: ${userInput}`);
         const aiResponse = getaiResponse(userInput);
-        conversation.push(`ai: ${jarvisResponse}`);
+        conversation.push(`ROXX: ${jarvisResponse}`);
         updateConversationContainer();
         chatboxInput.value = '';
     }
@@ -64,7 +64,8 @@ function handleUserInput() {
 // Generate a response for ai
 function getaiResponse(userInput) {
     
-    // Add logic to generate a response based on userInput
+//    api integration  here
+
     return `You said: ${userInput}`;
 }
 
@@ -114,9 +115,9 @@ function takeCommand(message) {
 function handleUserInput() {
     const userInput = chatboxInput.value.trim();
     if (userInput !== '') {
-        conversation.push(`User: ${userInput}`);
+        conversation.push(`USER: ${userInput}`);
         const aiResponse = getaiResponse(userInput);
-        conversation.push(`ai: ${aiResponse}`);
+        conversation.push(`ROXX: ${aiResponse}`);
         updateConversationContainer();
         chatboxInput.value = '';
     }
@@ -131,14 +132,18 @@ function updateConversationContainer() {
     });
 }
 function getaiResponse(userInput) {
-    if (userInput.toLowerCase() === "open") {
+    if (userInput.toLowerCase() === "youtube","Youtube") {
       takeCommand("open youtube");
       return "Opening YouTube...";
-    } else {
-      // Add logic to generate a response based on userInput
+    } else if (userInput.toLowerCase() === "open") {
+        takeCommand("open youtube");
+        return "Opening YouTube...";
+        
+
+      
       return `You said: ${userInput}`;
     }
-  }
+}
  
 
 sendBtn.addEventListener('click', handleUserInput);
