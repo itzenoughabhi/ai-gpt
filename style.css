@@ -165,11 +165,11 @@
 }
 @media (max-width: 786px) {
     .main {
-        background-image: url(/rm373batch16-52.jpg); /* Optional: Adjust if needed */
-        background-size: cover;
-        background-position: center;
-        flex-direction: column;
-        padding: 10px;
+        background-image: url(/6985678.jpg); 
+        height: 100vh;
+        width: 100vw;
+       
+        
     }
 
     .main .image-container {
@@ -177,71 +177,71 @@
     }
 
     .main .image-container .image img {
-        width: 250px; /* Adjusted for smaller screens */
+        width: 250px; 
     }
 
     .main .image-container h1 {
-        font-size: 30px; /* Reduced font size for smaller screens */
-        position: static; /* Adjusted to prevent overlap */
+        font-size: 30px; 
+        position: static; 
         margin-bottom: 5px;
     }
 
     .main .image-container p {
-        font-size: 14px; /* Reduced font size for smaller screens */
+        font-size: 14px; 
         margin-bottom: 20px;
     }
 
     .main .input {
         bottom: 10%;
         left: 50%;
-        width: 80vw; /* Increased width to fit smaller screens */
-        height: 40px; /* Reduced height */
-        border-radius: 15px; /* Adjusted border radius */
+        width: 80vw;
+        height: 40px; 
+        border-radius: 15px; 
         background: rgba(202, 253, 255, 0.5);
     }
 
     .main .input .talk {
-        width: 40px; /* Adjusted size */
-        height: 40px; /* Adjusted size */
-        font-size: 12px; /* Adjusted font size */
+        width: 40px; 
+        height: 40px;
+        font-size: 12px; 
     }
 
     .main .input .talk i {
-        font-size: 16px; /* Adjusted font size */
+        font-size: 16px;
     }
 
     .main .input .content {
-        font-size: 14px; /* Adjusted font size */
+        font-size: 14px; 
     }
 
     .conversation-container {
         top: 20%;
         right: 2%;
-        height: 50%; /* Increased height */
-        width: 90%; /* Increased width */
+        height: 50%; 
+        width: 90%;
     }
 
     .conversation-container p {
-        font-size: 14px; /* Adjusted font size */
-        line-height: 20px; /* Adjusted line height */
+        font-size: 14px;
+        line-height: 20px;
     }
 
     .robot {
-        height: 30%; /* Adjusted height */
-        top: 50%; /* Adjusted positioning */
-        left: 50%; /* Centered */
+        height: 30%; 
+        top: 50%;
+        left: 50%; 
         transform: translate(-50%, -50%);
     }
 
     .chatbox-input {
-        width: 80vw; /* Increased width to fit smaller screens */
-        height: 40px; /* Reduced height */
-        font-size: 14px; /* Adjusted font size */
+        width: 80vw; 
+        height: 40px; 
+        font-size: 14px; 
     }
 
     .send-btn {
-        width: 8vw; /* Adjusted width */
-        height: 40px; /* Reduced height */
-        right: 2vw; /* Adjusted position */
+        width: 8vw;
+        height: 40px;
+        right: 2vw; 
     }
 }
