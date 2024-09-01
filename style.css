@@ -163,16 +163,19 @@
     background: linear-gradient(#0feaea,#011128,#642bff,#ff22e6,#011128,#0feaea);
     border-radius: 20px;
 }
-@media (max-width: 786px) {
+@media (max-width: 480px) {
     .main {
         background-image: url(/6985678.jpg); 
+        background-position: center;
+        background-size: cover;
         height: 100vh;
         width: 100vw;
        
         
     }
+}
 
-    .main .image-container {
+    /* .main .image-container {
         padding: 5px;
     }
 
@@ -244,4 +247,4 @@
         height: 40px;
         right: 2vw; 
     }
-}
+} */
