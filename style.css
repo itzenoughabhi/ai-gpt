@@ -166,6 +166,34 @@
 p.user-message{
     color: #0feaea;
 }
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+  
+  .loading-spinner {
+    position: relative;
+    right: -15vw;
+    width: 40px;
+    height: 40px;
+   border-radius: 50%;
+    border: 4px solid #0ab413;
+    border-top-color: #0feaea;
+    border-bottom-color: red;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
 @media (max-width: 480px) {
     .main {

@@ -174,33 +174,39 @@ function takeCommand(message) {
 // Function to generate API response
 const generateAPIResponse = async (inputText) => {
     try {
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                contents: [{
-                    role: "user",
-                    parts: [{ text: inputText }]
-
-                }]
-            })
-
-        });
-
-        const data = await response.json();
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    
-        conversation.push({ user: inputText });
-        conversation.push({ roxx: text });
-
-        updateConversationContainer();
-
+      // Show the loading indicator
+      document.getElementById('loading-indicator').style.display = 'block';
+  
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{
+            role: "user",
+            parts: [{ text: inputText }]
+  
+          }]
+        })
+  
+      });
+  
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  
+      // Hide the loading indicator
+      document.getElementById('loading-indicator').style.display = 'none';
+  
+      conversation.push({ user: inputText });
+      conversation.push({ roxx: text });
+  
+      updateConversationContainer();
+  
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      // Hide the loading indicator
+      document.getElementById('loading-indicator').style.display = 'none';
     }
-}
-
+  }
 // Function to get API answer on enter
 function getApiAnswerOnEnter() {
     const inputText = chatboxInput.value.trim();
