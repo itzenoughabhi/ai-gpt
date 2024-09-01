@@ -4,6 +4,10 @@ const chatboxInput = document.querySelector('.chatbox-input');
 const conversationContainer = document.querySelector('.conversation-container');
 const sendBtn = document.querySelector('.send-btn');
 
+const API_KEY = "AIzaSyD3m3nE4A68Phzdoz-zz4sNIHe-z3QPzjg";  // Replace with your actual API key
+const apiEndpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+
+
 let conversation = [];
 
 // Function to handle speech synthesis
@@ -60,6 +64,26 @@ function handleUserInput() {
         chatboxInput.value = '';
     }
 }
+const generateAPIResponse = async () =>{
+    try{
+     const response = await fetch(apiEndpoint,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            contents :[{
+                role :"user",
+                parts: [{text: conversation}]
+
+            }]
+        })
+        
+     });
+     const data = await response.json();
+     console.log(data)
+    }catch(error){
+        console.log(error);
+    }
+}
 
 // Update the conversation container
 function updateConversationContainer() {
@@ -73,6 +97,7 @@ function updateConversationContainer() {
         }
         conversationContainer.appendChild(messageElement);
     });
+    generateAPIResponse();
 }
 
 // Get AI response ai
@@ -128,6 +153,7 @@ function getaiResponse(userInput) {
     else {
         return "I'm not sure how to respond to that. Could you please clarify?";
     }
+    
 }
 
 // Take command
@@ -174,3 +200,38 @@ chatboxInput.addEventListener('keydown', (event) => {
         handleUserInput();
     }
 });
+
+
+// Function to get AI response from Gemini API
+async function getAiResponse(userInput) {
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    
+    const data = {
+        'prompt': userInput,
+        'max_tokens': 2048,
+    };
+    
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
+        // Check if the result contains the content
+        const aiResponse = result.content || "No content returned from API.";
+        
+        return aiResponse;
+    } catch (error) {
+        console.error('Error fetching AI response:', error);
+        return "I'm not sure how to respond to that. Could you please clarify?";
+    }
+}
