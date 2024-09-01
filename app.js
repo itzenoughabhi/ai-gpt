@@ -4,8 +4,10 @@ const chatboxInput = document.querySelector('.chatbox-input');
 const conversationContainer = document.querySelector('.conversation-container');
 const sendBtn = document.querySelector('.send-btn');
 
-const API_KEY = "AIzaSyD3m3nE4A68Phzdoz-zz4sNIHe-z3QPzjg";  // Replace with your actual API key
+
+const API_KEY = "AIzaSyBmukY8-NOfBELkYXQ4ZXXNotBBwPItLIo";  // Replace with your actual API key
 const apiEndpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+
 
 
 let conversation = [];
@@ -64,23 +66,27 @@ function handleUserInput() {
         chatboxInput.value = '';
     }
 }
-const generateAPIResponse = async () =>{
-    try{
-     const response = await fetch(apiEndpoint,{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            contents :[{
-                role :"user",
-                parts: [{text: conversation}]
+const generateAPIResponse = async () => {
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{
+                    role: "user",
+                    parts: [{ text: "Hello" }]
 
-            }]
-        })
-        
-     });
-     const data = await response.json();
-     console.log(data)
-    }catch(error){
+                }]
+            })
+
+        });
+        const data = await response.json();
+        console.log("Response", data)
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        console.log("Message :", text);
+
+
+    } catch (error) {
         console.log(error);
     }
 }
@@ -109,7 +115,7 @@ function getaiResponse(userInput) {
     } else if (userInputLowercase.includes("how are you")) {
         return "I'm doing well, thanks! How can I assist you today?";
     }
-     else if (userInputLowercase.includes("whatapp")) {
+    else if (userInputLowercase.includes("whatapp")) {
         window.open("https://web.whatsapp.com/", "_blank");
         return "Opening whatapp...";
     }
@@ -153,7 +159,7 @@ function getaiResponse(userInput) {
     else {
         return "I'm not sure how to respond to that. Could you please clarify?";
     }
-    
+
 }
 
 // Take command
@@ -200,38 +206,3 @@ chatboxInput.addEventListener('keydown', (event) => {
         handleUserInput();
     }
 });
-
-
-// Function to get AI response from Gemini API
-async function getAiResponse(userInput) {
-    const headers = {
-        'Content-Type': 'application/json',
-    };
-    
-    const data = {
-        'prompt': userInput,
-        'max_tokens': 2048,
-    };
-    
-    try {
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(data),
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        
-        // Check if the result contains the content
-        const aiResponse = result.content || "No content returned from API.";
-        
-        return aiResponse;
-    } catch (error) {
-        console.error('Error fetching AI response:', error);
-        return "I'm not sure how to respond to that. Could you please clarify?";
-    }
-}
