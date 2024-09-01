@@ -11,7 +11,7 @@
     min-height: 100vh;
     position: relative;
     width: 100%;
-    background-image: url(/rm373batch16-52.jpg);
+    background-image: url(/ai-gpt/rm373batch16-52.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -163,6 +163,10 @@
     background: linear-gradient(#0feaea,#011128,#642bff,#ff22e6,#011128,#0feaea);
     border-radius: 20px;
 }
+p.user-message{
+    color: #0feaea;
+}
+
 @media (max-width: 480px) {
     .main {
         background-image: url(/6985678.jpg); 

@@ -1,15 +1,15 @@
+// Selectors
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
 const chatboxInput = document.querySelector('.chatbox-input');
 const conversationContainer = document.querySelector('.conversation-container');
 const sendBtn = document.querySelector('.send-btn');
 
-
-const API_KEY = "AIzaSyBmukY8-NOfBELkYXQ4ZXXNotBBwPItLIo";  // Replace with your actual API key
+// Constants
+const API_KEY = "AIzaSyAlW68kEHFpBi-POTynkQYtFooXB2f_2Dk"; // Replace with your actual API key
 const apiEndpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
 
-
-
+// Variables
 let conversation = [];
 
 // Function to handle speech synthesis
@@ -66,47 +66,21 @@ function handleUserInput() {
         chatboxInput.value = '';
     }
 }
-const generateAPIResponse = async () => {
-    try {
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                contents: [{
-                    role: "user",
-                    parts: [{ text: "Hello" }]
 
-                }]
-            })
+// Get AI response
+function getaiResponse(userInput) {
+    const userInputLowercase = userInput.toLowerCase();
 
-        });
-        const data = await response.json();
-        console.log("Response", data)
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        console.log("Message :", text);
-
-
-    } catch (error) {
-        console.log(error);
+    if (userInputLowercase.includes("hello") || userInputLowercase.includes("hi")) {
+        return "Hello! It's nice to meet you.";
+    } else if (userInputLowercase.includes("how are you")) {
+        return "I'm doing well, thanks! How can I assist you today?";
+    } else if (userInputLowercase.includes("whatapp")) {
+        window.open("https://web.whatsapp.com/", "_blank");
+        return ""
     }
 }
 
-// Update the conversation container
-function updateConversationContainer() {
-    conversationContainer.innerHTML = '';
-    conversation.forEach(message => {
-        const messageElement = document.createElement('p');
-        if (message.user) {
-            messageElement.innerHTML = `<strong>USER:</strong> ${message.user}`;
-        } else if (message.roxx) {
-            messageElement.innerHTML = `<strong>ROXX:</strong> ${message.roxx}`;
-        }
-        conversationContainer.appendChild(messageElement);
-    });
-    generateAPIResponse();
-}
-
-// Get AI response ai
 function getaiResponse(userInput) {
     const userInputLowercase = userInput.toLowerCase();
 
@@ -196,13 +170,77 @@ function takeCommand(message) {
     }
 }
 
-// Send button functionality
-sendBtn.addEventListener('click', handleUserInput);
 
-// Enter key functionality for chatbox input
+// Function to generate API response
+const generateAPIResponse = async (inputText) => {
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{
+                    role: "user",
+                    parts: [{ text: inputText }]
+
+                }]
+            })
+
+        });
+
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    
+        conversation.push({ user: inputText });
+        conversation.push({ roxx: text });
+
+        updateConversationContainer();
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Function to get API answer on enter
+function getApiAnswerOnEnter() {
+    const inputText = chatboxInput.value.trim();
+
+    console.log('Fetched Text:', inputText);
+
+    generateAPIResponse(inputText);
+
+    chatboxInput.value = '';
+}
+
+// Add event listener for 'keydown' event
 chatboxInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        event.preventDefault();
-        handleUserInput();
+        event.preventDefault(); 
+        getApiAnswerOnEnter(); 
+    }
+});
+
+// Update the conversation container
+function updateConversationContainer() {
+    conversationContainer.innerHTML = '';
+    conversation.forEach(message => {
+        const messageElement = document.createElement('p');
+        if (message.user) {
+            messageElement.innerHTML = `<strong>USER:</strong> ${message.user}`;
+            messageElement.classList.add('user-message'); // Add this line to add a CSS class
+        } else if (message.roxx) {
+            messageElement.innerHTML = `<strong>ROXX:</strong> ${message.roxx}`;
+        }
+        conversationContainer.appendChild(messageElement);
+    });
+}
+
+
+
+// Add event listener for 'keydown' event
+chatboxInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent the default action (e.g., form submission or new line)
+        handleUserInput(); // Call the function to handle user input
     }
 });
