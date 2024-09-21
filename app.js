@@ -6,7 +6,7 @@ const conversationContainer = document.querySelector('.conversation-container');
 const sendBtn = document.querySelector('.send-btn');
 
 // Constants
-const API_KEY = "AIzaSyAlW68kEHFpBi-POTynkQYtFooXB2f_2Dk"; // Replace with your actual API key
+const API_KEY = "Replace your  Api"; // Replace with your actual API key
 const apiEndpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
 
 // Variables
